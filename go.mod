@@ -1,4 +1,4 @@
-module github.com/krakozaure/tmpl
+module github.com/sto/tmpl
 
 go 1.20
 
