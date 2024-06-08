@@ -5,6 +5,7 @@ set -eu
 BUILD_ARCHITECTURES="${BUILD_ARCHITECTURES:-amd64 arm64}"
 BUILD_OPERATING_SYSTEMS="${BUILD_OPERATING_SYSTEMS:-darwin linux windows}"
 GPG_KEY="${GPG_KEY:-Krakozaure}"
+VERSION_FLAG="-X 'main.Version=$(git describe --tags --always --dirty)'"
 
 prog_name="$(basename "$PWD")"
 build_dir="./release"
@@ -17,7 +18,7 @@ for GOOS in $BUILD_OPERATING_SYSTEMS; do
   for GOARCH in $BUILD_ARCHITECTURES; do
     f="${prog_name}-${GOOS}_${GOARCH}"
     echo " - $f"
-    GOARCH="$GOARCH" GOOS="$GOOS" CGO_ENABLED="0" go build -ldflags='-s -w' -o "${build_dir}/$f"
+    GOARCH="$GOARCH" GOOS="$GOOS" CGO_ENABLED="0" go build -ldflags="$VERSION_FLAG -s -w" -o "${build_dir}/$f"
   done
 done
 

@@ -27,6 +27,9 @@ var (
 	Strict    bool
 )
 
+// Version is the version of the application
+var Version = "development"
+
 func initFlags() {
 	flag.Var(
 		&FilesList,
@@ -62,7 +65,9 @@ OPTIONS:
 			os.Args[0],
 		)
 		flag.PrintDefaults()
+		log.Printf("\ntmpl version = '%s'\n", Version)
 	}
 
 	flag.Parse()
+
 }
