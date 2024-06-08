@@ -17,7 +17,7 @@ for GOOS in $BUILD_OPERATING_SYSTEMS; do
   for GOARCH in $BUILD_ARCHITECTURES; do
     f="${prog_name}-${GOOS}_${GOARCH}"
     echo " - $f"
-    GOARCH="$GOARCH" GOOS="$GOOS" go build -ldflags='-s -w' -o "${build_dir}/$f"
+    GOARCH="$GOARCH" GOOS="$GOOS" CGO_ENABLED="0" go build -ldflags='-s -w' -o "${build_dir}/$f"
   done
 done
 
